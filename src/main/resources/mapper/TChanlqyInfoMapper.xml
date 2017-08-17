@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allinpay.bigdata.mapper.TChanlqyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.allinpay.bigdata.model.TChanlqyInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="mer_id" jdbcType="VARCHAR" property="merId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <id column="Intfc_id" jdbcType="VARCHAR" property="intfcId" />
+    <result column="qy_batch_id" jdbcType="VARCHAR" property="qyBatchId" />
+    <result column="Intfc_name" jdbcType="VARCHAR" property="intfcName" />
+    <result column="query_status" jdbcType="VARCHAR" property="queryStatus" />
+    <result column="rediskey" jdbcType="VARCHAR" property="rediskey" />
+    <result column="insertime" jdbcType="TIMESTAMP" property="insertime" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.allinpay.bigdata.model.TChanlqyInfo">
+    insert into T_CHANLQY_INFO (id, mer_id, user_id, 
+      Intfc_id, qy_batch_id, Intfc_name, 
+      query_status, rediskey, insertime, erroreason
+      )
+    values (#{id,jdbcType=INTEGER}, #{merId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{intfcId,jdbcType=VARCHAR}, #{qyBatchId,jdbcType=VARCHAR}, #{intfcName,jdbcType=VARCHAR}, 
+      #{queryStatus,jdbcType=VARCHAR}, #{rediskey,jdbcType=VARCHAR}, #{insertime,jdbcType=TIMESTAMP},
+      #{errorreason,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+</mapper>

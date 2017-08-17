@@ -1,0 +1,73 @@
+server:
+  port: 8090
+
+
+spring:
+  application:
+    name: 大数据风控可信渠道接口
+  http:
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8
+  datasource:
+    name: riskportkx
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://138.138.81.160:3306/bigdatadb?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  messages:
+    basename: i18n/messages
+    
+kafka:
+  consumer:
+    zookeeper:
+      connect: 138.138.81.191:2181,138.138.81.192:2181,138.138.81.193:2181
+      session.timeout.ms: 4000
+      sync.time.ms: 200
+    group:
+      id: zdtest
+    auto:
+      commit.interval.ms: 1000
+      offset.reset: smallest
+    serializer.class: kafka.serializer.StringEncoder
+    default:
+      topic: kexin
+  producer:
+    broker:
+      list: 138.138.81.195:9092,138.138.81.196:9092,138.138.81.197:9092
+    serializer:
+      class: kafka.serializer.StringEncoder
+    key:
+      serializer:
+        class: kafka.serializer.StringEncoder
+    request:
+      required:
+        acks: 1
+    partitioner:
+      class: kafka.producer.DefaultPartitioner
+
+mybatis:
+  typeAliasesPackage: com.allinpay.bigdata.model
+  mapperLocations: classpath:mapper/*.xml
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+commonparams:
+  kexinbrokenUrl: https://api.kexin.net:18443/dishonesty/format/json
+  kexinAKey: 1201713
+  kexinSKey: 8c4d1b3f1937d1b6f07155a9756797b1
+  userIP: 116.236.169.62
